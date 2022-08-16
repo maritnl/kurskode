@@ -15,17 +15,51 @@ METADATA
   policy_rule = <<POLICY_RULE
     {
     "if": {
-      "not": {
-        "field": "location",
-        "in": "[parameters('allowedLocations')]"
-      }
-    },
-    "then": {
-      "effect": "deny"
-    }
-  }
-POLICY_RULE
 
+                "allOf": [{
+
+                "field": "type",
+
+                "equals" : "Microsoft.Compute/virtualMachines"
+
+            },
+
+            {
+
+                "not": {
+
+                    "field": "location",
+
+                    "in": "[parameters('allowedLocations')]"
+
+                }
+
+            }
+
+            ]
+
+            },
+
+            "then": {
+
+                "effect": "deny"
+
+            }
+
+        
+   }
+POLICY_RULE
+#     {
+#     "if": {
+#       "not": {
+#         "field": "location",
+#         "in": "[parameters('allowedLocations')]"
+#       }
+#     },
+#     "then": {
+#       "effect": "deny"
+#     }
+#   }
 
   parameters = <<PARAMETERS
     {
